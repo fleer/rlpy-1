@@ -247,7 +247,7 @@ def find_hyperparameters(
             "-".join([str(v) for v in hyperparam.values()]))
 
         # execute experiment
-        rt.run(setting, location=full_path, ids=range(1, trials_per_point + 1),
+        rt.run(setting, location=full_path, ids=range(trials_per_point),
                parallelization=parallelization, force_rerun=False, block=True, **hyperparam)
 
         # all jobs should be done
@@ -279,7 +279,7 @@ def find_hyperparameters(
                 "std_last_mean": std}
 
     if parallelization == "condor_all":
-        trials = CondorTrials(path=path, ids=range(1, trials_per_point + 1),
+        trials = CondorTrials(path=path, ids=range(trials_per_point),
                               setting=setting, objective=objective)
         domain = hyperopt.Domain(dummy_f, space, rseed=123)
         rval = hyperopt.FMinIter(hyperopt.rand.suggest, domain, trials,

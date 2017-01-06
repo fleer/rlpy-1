@@ -177,7 +177,7 @@ def run(filename, location, ids, parallelization="sequential",
 
     # filter ids if necessary
     if not force_rerun:
-        finished_ids = get_finished_ids(location)
+        finished_ids = [x-1 for x in get_finished_ids(location)]
         ids = [idtmp for idtmp in ids if idtmp not in finished_ids]
 
     if len(ids):
